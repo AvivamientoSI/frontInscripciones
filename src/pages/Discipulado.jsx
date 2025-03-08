@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Container, VStack, Heading, useToast, Box, Input, Button, useColorModeValue, NumberIncrementStepper, NumberDecrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text  } from "@chakra-ui/react";
+import { Container, VStack,Link , Heading, useToast, Box, Input, Button, useColorModeValue, NumberIncrementStepper, NumberDecrementStepper, NumberInput, NumberInputField, NumberInputStepper, Text  } from "@chakra-ui/react";
 import { useInscriptionsStore } from "../store/inscriptions";
+import {ArrowBackIcon} from "@chakra-ui/icons";
 
 const Discipulado = () => {
     const[newInscription, setNewInscription] = useState({
@@ -83,6 +84,9 @@ const Discipulado = () => {
                 </Button>
             </VStack>
         </Box>
+        <Link href="/">
+            <Button leftIcon={<ArrowBackIcon/>}>Volver</Button>
+        </Link>
     </VStack>
   </Container>
     )

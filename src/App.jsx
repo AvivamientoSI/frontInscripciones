@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Abc from "./pages/Abc.jsx"
 import EscuelaVida from "./pages/EscuelaVida.jsx"
 import Discipulado from "./pages/Discipulado.jsx"
+import Footer from "./components/Footer.jsx"
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <Route path="/inscriptions/Escuela-de-Vida" element={<EscuelaVida/>} />
           <Route path="/inscriptions/Discipulado" element={<Discipulado/>} />
         </Routes>
-
+        <Footer/>
       </Box>
     </>
   )
