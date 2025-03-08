@@ -18,29 +18,19 @@ const Abc = () => {
 
     const handleAddInscription = async () => {
         const {success, message} = await createInscription(newInscription);
-        if(!success) {
-            toast({
-                title:"Error",
-                description: message,
-                status: "error",
-                duration: 5000,
-                isClosable: true
-            })
-        } else {
-            toast({
-                title:"Success",
-                description: message,
-                status: "success",
-                duration: 5000,
-                isClosable: true
-            })
-            
-            setNewInscription({name:"",
-                lastname:"",
-                document:"",
-                email:"",
-                phone:""})
+        toast({
+            title: success ? "Éxito" : "Error",
+            description: message,
+            status: success ? "success" : "error",
+            duration: 5000,
+            isClosable: false
+        });
+        console.log(message);
+        
+        if (success) {
+            setNewInscription({ name: "", lastname: "", document: "", email: "", phone: "" });
         }
+    
     }
     return (
         <Container maxW={"container.sm"}>
