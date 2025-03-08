@@ -40,30 +40,46 @@ export const useInscriptionsStore = create((set) => ({
         if(!newInscription.name || !newInscription.lastname || !newInscription.document || !newInscription.email || !newInscription.phone){
             return {success: false, message: "Complete todos los campos"}
         }
-        const res = await fetch("https://inscripciones-i4tm.onrender.com/dis", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(newInscription)
+        try {
+            const res = await fetch("https://inscripciones-i4tm.onrender.com/dis", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body: JSON.stringify(newInscription)
 
-        })
-        const data = await res.json();
-        set((state) => ({inscriptions:[...state.inscriptions, data.data]}))
-        return {success: true, message: "Inscripcion creada con exito"} 
+            })
+            
+            const data = await res.json();
+
+            if (!res.ok){
+                return {success: false, message: `Ya estas registrado/a`}
+            }
+            set((state) => ({inscriptions:[...state.inscriptions, data.data]}))
+            return {success: true, message: `Inscripcion creada con exito`} 
+        } catch (error) {
+            return {success: false, menssage: "Error en la inscripción", error}
+        }
     },
 
     createInsEsc: async (newInscription) => {
         if(!newInscription.name || !newInscription.lastname || !newInscription.document || !newInscription.email || !newInscription.phone){
             return {success: false, message: "Complete todos los campos"}
         }
-        const res = await fetch("https://inscripciones-i4tm.onrender.com/es", {
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(newInscription)
+        try{
+            const res = await fetch("https://inscripciones-i4tm.onrender.com/es", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify(newInscription)
 
-        })
-        const data = await res.json();
-        set((state) => ({inscriptions:[...state.inscriptions, data.data]}))
-        return {success: true, message: "Inscripcion creada con exito"}
+            })
+            const data = await res.json();
+            if (!res.ok){
+                return {success: false, message: `Ya estas registrado/a`}
+            }
+            set((state) => ({inscriptions:[...state.inscriptions, data.data]}))
+            return {success: true, message: "Inscripcion creada con exito"}
+        } catch (error) {
+            return {success: false, menssage: "Error en la inscripción", error}
+        }
     }
 
 }));
