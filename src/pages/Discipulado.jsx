@@ -85,7 +85,7 @@ const Discipulado = () => {
             </VStack>
         </Box>
         <Link href="/">
-            <Button leftIcon={<ArrowBackIcon/>}>Volver</Button>
+            <Button leftIcon={<ArrowBackIcon/>} mb={5}>Volver</Button>
         </Link>
     </VStack>
   </Container>
