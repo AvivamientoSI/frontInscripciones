@@ -1,12 +1,13 @@
 
-import { Box, Heading, Text, Link, Image, HStack, IconButton, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
+import { Box, Heading, Text, Link, Image, HStack, IconButton, Modal, useColorModeValue, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
 import { EditIcon, DeleteIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 
 
 const AbcCard = ({school}) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const bg = useColorModeValue("white", "gray.800");
     return (
-        <Box shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform:"translateY(-5px)", shadow: "xl"}}>
+        <Box bg={bg} shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform:"translateY(-5px)", shadow: "xl"}}>
         
         <Image src={school.image} alt={school.name} h={'280px'} w={'1280px'} objectFit='cover' />
 
@@ -31,13 +32,17 @@ const AbcCard = ({school}) => {
                 <ModalHeader>Info Escuela</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <h1>info bla bla bla</h1>
+                    <Text fontSize='xl' fontWeight='bold'>
+                        Informacion de la Escuela
+                    </Text>
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3}>
-                    Inscribirse
-                    </Button>
+                    <Link href='/inscriptions/ABC'>
+                        <Button colorScheme='blue' mr={3}>
+                        Inscribirse
+                        </Button>
+                    </Link>
                     <Button variant='ghost' onClick={onClose}>Cerrar</Button>
                 </ModalFooter>
                 </ModalContent>

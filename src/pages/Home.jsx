@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <Container maxW='container.xl' py={12}>
             <VStack spacing={8}>
-        <Text fontSize={"30"} fontWeight={"bold"} textAlign={"center"} bgGradient={"linear(to-r, white, red)"} bgClip={"text"}>
+        <Text fontSize={"60"} fontWeight={"bold"} textAlign={"center"}>
           Escuelas Avivamiento SI
         </Text>
 
