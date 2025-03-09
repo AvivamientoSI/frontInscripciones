@@ -16,7 +16,7 @@ const Home = () => {
     console.log('Home', schools);
     
     return (
-        <Container maxW='container.xl' py={12}>
+        <Container maxW='container.xl' py={5} mt={-5}>
             <VStack spacing={8}>
         <Text fontSize={{base: "50", sm: "60"}} fontWeight={"bold"} textAlign={"center"}>
           Escuelas Avivamiento SI
