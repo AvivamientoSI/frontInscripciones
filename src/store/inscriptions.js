@@ -15,7 +15,7 @@ export const useInscriptionsStore = create((set) => ({
             return {success: false, message: "Complete todos los campos"};
         }
         try {
-            const res = await fetch("https://inscripciones-i4tm.onrender.com/abc", {
+            const res = await fetch("https://inscripciones-production.up.railway.app/abc", {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(newInscription)
@@ -41,7 +41,7 @@ export const useInscriptionsStore = create((set) => ({
             return {success: false, message: "Complete todos los campos"}
         }
         try {
-            const res = await fetch("https://inscripciones-i4tm.onrender.com/dis", {
+            const res = await fetch("https://inscripciones-production.up.railway.app/dis", {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body: JSON.stringify(newInscription)
@@ -65,7 +65,7 @@ export const useInscriptionsStore = create((set) => ({
             return {success: false, message: "Complete todos los campos"}
         }
         try{
-            const res = await fetch("https://inscripciones-i4tm.onrender.com/es", {
+            const res = await fetch("https://inscripciones-production.up.railway.app/es", {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(newInscription)
