@@ -12,10 +12,10 @@ const DisCard = ({school}) => {
         <Image src={school.image} alt={school.name} h={'280px'} w={'1280px'} objectFit='cover' />
 
         <Box p={4}>
-            <Heading as='h3' size='md' mb={2}>
+            <Heading as='h3' size='md' mb={2} textTransform={"uppercase"}>
                 {school.name}
             </Heading>
-            <Text fontWeight='bold' fontSize='xl' mb={4}>
+            <Text fontSize='lg' mb={4} opacity={0.7}>
                 {school.info}
             </Text>
             <HStack spacing={2}>
@@ -29,10 +29,15 @@ const DisCard = ({school}) => {
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay />
                 <ModalContent>
-                <ModalHeader>Info Escuela</ModalHeader>
+                <ModalHeader fontWeight='bold' fontSize={"2xl"}>{school.name}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <h1>info bla bla bla</h1>
+                    <Text fontSize='xl' textDecoration={"underline"} mb={2} >
+                        ¿De qué trata esta escuela?
+                    </Text>
+                    <Text fontSize='lg' mb={5}>
+                        Esta escuela trata sobre aprender a caminar con Jesús a través de Sus enseañanzas y sobre cómo seguirle convirtiéndonos en sus discipulos
+                    </Text>
                 </ModalBody>
 
                 <ModalFooter>

@@ -12,10 +12,10 @@ const AbcCard = ({school}) => {
         <Image src={school.image} alt={school.name} h={'280px'} w={'1280px'} objectFit='cover' />
 
         <Box p={4}>
-            <Heading as='h3' size='md' mb={2}>
-                {school.name}
+            <Heading as='h3' size='md' mb={2} textTransform={"uppercase"}>
+                El {school.name} del Evangélio 
             </Heading>
-            <Text fontWeight='bold' fontSize='xl' mb={4}>
+            <Text  fontSize='lg' mb={4} opacity={0.7}>
                 {school.info}
             </Text>
             <HStack spacing={2}>
@@ -29,11 +29,20 @@ const AbcCard = ({school}) => {
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay />
                 <ModalContent>
-                <ModalHeader>Info Escuela</ModalHeader>
+                <ModalHeader fontWeight='bold' fontSize={"2xl"}>El {school.name} del Evangélio</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                    <Text fontSize='xl' fontWeight='bold'>
-                        Informacion de la Escuela
+                    <Text fontSize='xl' textDecoration={"underline"} mb={2} >
+                        ¿De qué trata esta escuela?
+                    </Text>
+                    <Text fontSize='lg' mb={5}>
+                        En esta escuela aprenderemos a dar los primeros pasos en el Evangélio
+                    </Text>
+                    <Text fontSize='xl' textDecoration={"underline"} mb={2} >
+                        ¿Para quién está dirigida?
+                    </Text>
+                    <Text fontSize='lg'>
+                        Para todos aquellos que llegan a Cristo y quieren empezar a conocer a Dios y agradarle
                     </Text>
                 </ModalBody>
 
