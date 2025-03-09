@@ -15,7 +15,7 @@ export const useInscriptionsStore = create((set) => ({
             return {success: false, message: "Complete todos los campos"};
         }
         try {
-            const res = await fetch("http://localhost:8080/abc", {
+            const res = await fetch("https://inscripciones-i4tm.onrender.com/abc", {
                 method:"POST",
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(newInscription)

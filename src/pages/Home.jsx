@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSchoolsStore } from "../store/schools.js";
-import { Container, VStack, SimpleGrid, Text } from "@chakra-ui/react";
+import { Container, VStack, SimpleGrid, Text, Spinner } from "@chakra-ui/react";
 import EsCard from "../components/esCard.jsx";
 import IfComponent from "../components/ifComponent.jsx";
 
@@ -27,6 +27,14 @@ const Home = () => {
           <IfComponent key={p.id || index} school={p} index={index} />
           ))}
         </SimpleGrid>
+        {schools.length === 0 && (
+          <Text textAlign={"center"}>
+            <Spinner thickness='4px' speed='0.5s' emptyColor='gray.200' color='blue.500' size='xl'/>
+            <br />
+            Cargando Escuelas
+            
+          </Text>
+        )}
       </VStack>
         </Container>
     )
