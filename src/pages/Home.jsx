@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useSchoolsStore } from "../store/schools.js";
 import { Container, VStack, SimpleGrid, Text, Spinner } from "@chakra-ui/react";
-import EsCard from "../components/esCard.jsx";
 import IfComponent from "../components/ifComponent.jsx";
 
 

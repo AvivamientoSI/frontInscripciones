@@ -80,6 +80,33 @@ export const useInscriptionsStore = create((set) => ({
         } catch (error) {
             return {success: false, menssage: "Error en la inscripción", error}
         }
+    },
+
+    fetchInscriptionABC: async () => {
+        const response = await fetch('https://inscripciones-production.up.railway.app/table/abc');
+        const data = await response.json();
+        console.log(data);
+        
+        set({inscriptions: data.data});
+        
+    },
+
+    fetchInscriptionDIS: async () => {
+        const response = await fetch('https://inscripciones-production.up.railway.app/table/dis');
+        const data = await response.json();
+        console.log(data);
+        
+        set({inscriptions: data.data});
+        
+    },
+
+    fetchInscriptionES: async () => {
+        const response = await fetch('https://inscripciones-production.up.railway.app/table/es');
+        const data = await response.json();
+        console.log(data);
+        
+        set({inscriptions: data.data});
+        
     }
 
 }));

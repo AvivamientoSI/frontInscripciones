@@ -1,6 +1,7 @@
 
 import { Box, Heading, Text, Link, useColorModeValue, Image, HStack, IconButton, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
-import { EditIcon, DeleteIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+import {Tr, Td} from '@chakra-ui/react';
 
 
 const EsCard = ({school}) => {
@@ -51,6 +52,41 @@ const EsCard = ({school}) => {
                 </ModalContent>
         </Modal>
     </Box>
+    )
+};
+
+export const EsCardTable = ({school}) => {
+    const bg = useColorModeValue("white", "gray.800");
+    const txt =  useColorModeValue("gray.800", "white"); 
+    return (
+        <Box h={'400px'} bg={bg} shadow='lg' rounded='lg' overflow='hidden' transition='all 0.3s' _hover={{transform:"translateY(-5px)", shadow: "xl"}}>
+        <Link href='/table/es'>
+        
+        <Image src={school.image} alt={school.name} h={'280px'} w={'full'} objectFit='cover' />
+
+        <Box p={4} textAlign={'center'}>
+            <Heading as='h3' size='md' textTransform={"uppercase"} color={txt}>
+                {school.name} 
+            </Heading>
+            <HStack spacing={2}>
+                <Link href='/table/es'>
+                    <Button rightIcon={<ArrowForwardIcon />} colorScheme='teal' variant='ghost' mt={6}>Ir a la Planilla</Button>
+                </Link>
+            </HStack>
+        </Box>
+        </Link>
+    </Box>
+    )
+}
+
+export const EsCardTableInfo = ({inscriptions, index}) => {
+    return (
+        <Tr>
+            <Td>{index}</Td>
+            <Td>{inscriptions.name}</Td>
+            <Td>{inscriptions.lastname}</Td>
+            <Td isNumeric>{inscriptions.document}</Td>
+        </Tr>
     )
 };
 
