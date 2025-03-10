@@ -30,7 +30,7 @@ export const useInscriptionsStore = create((set) => ({
             set((state) => ({inscriptions:[...state.inscriptions, data.data],
                 message: "Inscripcion creada con exito"
             }));
-            return {success: true, menssage: data.message || "Inscripción creada con éxito"}
+            return {success: true, message: `Inscripcion creada con exito`}
         } catch (error) {
             return {success: false, menssage: "Error en la inscripción", error}
         }
