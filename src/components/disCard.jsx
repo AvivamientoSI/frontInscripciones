@@ -85,7 +85,7 @@ export const DisCardTableInfo = ({inscriptions, index}) => {
             <Td>{index}</Td>
             <Td>{inscriptions.name}</Td>
             <Td>{inscriptions.lastname}</Td>
-            <Td isNumeric>{inscriptions.document}</Td>
+            <Td isNumeric>{inscriptions.phone}</Td>
         </Tr>
     )
 };
