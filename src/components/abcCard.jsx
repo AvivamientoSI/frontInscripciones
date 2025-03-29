@@ -1,7 +1,8 @@
 
 import { Box, Heading, Text, Link, Image, HStack, IconButton, Modal, useColorModeValue, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Button, useDisclosure } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import {Tr, Td} from '@chakra-ui/react';
+import {Tr, Td, Checkbox, CheckboxGroup} from '@chakra-ui/react';
+
 
 
 export const AbcCard = ({school}) => {
@@ -91,7 +92,8 @@ export const AbcCardTableInfo = ({inscriptions, index}) => {
             <Td>{index}</Td>
             <Td>{inscriptions.name}</Td>
             <Td>{inscriptions.lastname}</Td>
-            <Td isNumeric>{inscriptions.phone}</Td>
+            {/* <Td isNumeric>{inscriptions.phone}</Td> */}
+            <Td><Checkbox colorScheme='green'>Presente</Checkbox></Td>
         </Tr>
     )
 };
