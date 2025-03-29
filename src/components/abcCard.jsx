@@ -92,7 +92,7 @@ export const AbcCardTableInfo = ({inscriptions, index}) => {
             <Td>{index}</Td>
             <Td>{inscriptions.name}</Td>
             <Td>{inscriptions.lastname}</Td>
-            {/* <Td isNumeric>{inscriptions.phone}</Td> */}
+            <Td isNumeric>{inscriptions.phone}</Td>
             <Td><Checkbox colorScheme='green'>Presente</Checkbox></Td>
         </Tr>
     )
