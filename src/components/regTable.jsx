@@ -1,22 +1,20 @@
-import { Tr, Td, Box, HStack, IconButton, Select, NumberInput, NumberInputField, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, VStack, Input, ModalFooter, Button, Link } from '@chakra-ui/react';
+import { Tr, Td, HStack, IconButton, useToast} from '@chakra-ui/react';
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-//import { useState } from 'react';
+import { useRegistrationStore } from '../store/registration.js';
 
-export const RegTable = ({registrations, index}) => {
-    
-/*     const [updateRegistration, setUpdateRegistration] = useState(registrations);
-    
+export const RegTable = ({registrations, index, onEdit}) => {  
+    const {deleteRegistration} = useRegistrationStore();
     const toast = useToast();
+
+    const handleEdit = () => {
+        onEdit();
+
+    };
     
-    const { isOpen, onClose } = useDisclosure() */
-
-
-    /* const handleUpdateRegistration = async (id, updateRegistration) => {
-        const {success, message} = await updateRegistration(id, updateRegistration);
-        onClose();
+    const handleDeleteRegistration = async (_id) => {
+        const {success, message} = await deleteRegistration(_id);
         if (!success) {
-			toast({
-				title: "Error",
+            toast({title: "Error",
 				description: message,
 				status: "error",
 				duration: 3000,
@@ -24,14 +22,14 @@ export const RegTable = ({registrations, index}) => {
 			});
 		} else {
 			toast({
-				title: "Success",
-				description: "Registro actualizado correctamente",
+				description: message,
 				status: "success",
 				duration: 3000,
-				isClosable: false,
+				isClosable: true,
 			});
-		}
-    } */
+        }
+        
+    };
     return (
             <Tr>
                 <Td>{index}</Td>
@@ -40,9 +38,9 @@ export const RegTable = ({registrations, index}) => {
                 <Td isNumeric>{registrations.phone}</Td>
                 <Td>
                     <HStack alignItems={"center"} justifyContent={"center"} spacing={4}>
-                        <IconButton icon={<EditIcon/>}
+                        <IconButton icon={<EditIcon/>} onClick={handleEdit}
                         colorScheme="blue" />
-                        <IconButton icon={<DeleteIcon/>}
+                        <IconButton icon={<DeleteIcon/>} onClick={() => handleDeleteRegistration(registrations._id)}
                         colorScheme="red" />
                     </HStack>
                 </Td>

@@ -1,6 +1,6 @@
 import { useRegistrationStore } from "../store/registration";
 import { useState, useEffect } from "react";
-import { Container, VStack, Heading, TableContainer, Table, Select, Divider, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, useToast, Box, Input, Button, useColorModeValue, NumberInput, NumberInputField, Text} from "@chakra-ui/react";
+import { Container, VStack, Heading, TableContainer, useDisclosure, Table, Select, Divider, TableCaption, Thead, Tr, Th, Tbody, Td, Tfoot, useToast, Box, Input, Button, useColorModeValue, NumberInput, NumberInputField, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter} from "@chakra-ui/react";
 import { RegTable } from "../components/regTable";
 
 const Registrations = () => {
@@ -14,10 +14,25 @@ const Registrations = () => {
             age:"",
             church:""
         });
-        
+        const {createRegistration, fetchRegistrations, updateRegistration, registrations} = useRegistrationStore();
         const toast = useToast();
-    
-        const {createRegistration, fetchRegistrations, registrations} = useRegistrationStore();
+        
+        const { isOpen, onClose, onOpen } = useDisclosure()
+
+        const [updatedRegistration, setUpdatedRegistration] = useState(registrations);
+        
+        useEffect(() => {
+            fetchRegistrations();
+            }, [fetchRegistrations]);
+
+            const handleEditClick = (registrations) => {
+                setUpdatedRegistration(registrations); // Cargás los datos al estado
+                if (!registrations._id) {
+                    console.error("ID no disponible en el registro.");
+                }
+                onOpen(); // Abrís el modal
+            };
+
     
         const handleAddRegistration = async () => {
             const {success, message} = await createRegistration(newRegistration);
@@ -31,7 +46,6 @@ const Registrations = () => {
                 })
             } else {
                 toast({
-                    title:"Éxito",
                     description: message,
                     status: "success",
                     duration: 5000,
@@ -51,9 +65,37 @@ const Registrations = () => {
             }
         }
 
-        useEffect(() => {
-            fetchRegistrations();
-            }, [fetchRegistrations]);
+        const formatDate = (dateString) => {
+            return new Date(dateString).toISOString().split("T")[0];
+          };
+        
+        
+        const handleUpdateRegistration = async (_id, updatedRegistration) => {
+            
+            if (!_id) {
+                console.error("ID no proporcionado");
+                return; // Evita hacer la solicitud si el ID no está presente
+              }           
+            
+        const {success, message} = await updateRegistration(_id, updatedRegistration);
+            if (!success) {
+                toast({
+                    title: "Error",
+                    description: message,
+                    status: "error",
+                    duration: 3000,
+                    isClosable: true,
+                 });
+            } else {
+                toast({
+                    description: "Actualizado correctamente",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: false,
+                });
+            }
+            onClose(); // Cierra el modal después de la actualización
+        }
     return (
         <Container maxW={"container.xl"}>
             <VStack spacing={8}>
@@ -90,7 +132,7 @@ const Registrations = () => {
                         value={newRegistration.address} 
                         onChange={(e) => setNewRegistration({...newRegistration, address: e.target.value})}
                         />
-                        <Text textAlign={"left"} w={"full"}>Número de Celular (Con WhatsApp)</Text>
+                        <Text textAlign={"left"} w={"full"}>Número de Celular</Text>
                         <NumberInput w={'full'} value={newRegistration.phone} onChange={(value) => setNewRegistration({...newRegistration, phone: Number(value)})}>
                             <NumberInputField placeholder="1123456789" name="phone"/>
                         </NumberInput>
@@ -124,7 +166,7 @@ const Registrations = () => {
                     </Thead>
                     <Tbody>
                         {Array.isArray(registrations) ? (registrations.map ((p, index) => (
-                                                <RegTable key={p._id} registrations={p} index={index+1} />
+                                                <RegTable key={p._id} registrations={p} index={index+1} onEdit={() => handleEditClick(p)} />
                                             ))
                                         ) : (
                                             <Tr>
@@ -136,6 +178,64 @@ const Registrations = () => {
                 </Table>
             </TableContainer>
             <Box h="10" />
+            <Modal isOpen={isOpen} onClose={onClose} >
+            <ModalOverlay />
+                <ModalContent>
+                <ModalHeader>Actualizar Registro</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                    <VStack spacing={4}>
+                        <Input placeholder="Nombre" name="name" 
+                        value={updatedRegistration.name}
+                        onChange={(e) => setUpdatedRegistration({ ...updatedRegistration, name: e.target.value })}
+                        />            
+                        <Input placeholder="Apellido" name="lastname" 
+                        value={updatedRegistration.lastname}
+                        onChange={(e) => setUpdatedRegistration({ ...updatedRegistration, lastname: e.target.value })}
+                        />
+                        <NumberInput w={'full'}
+                        value={updatedRegistration.document || ""}
+                        onChange={(value) => setUpdatedRegistration({ ...updatedRegistration, document: Number(value) })} >
+                            <NumberInputField placeholder="Documento de Identidad" name="document"/>
+                        </NumberInput>
+                        <Select value={updatedRegistration.sex || ""} 
+                        onChange={(e) => setUpdatedRegistration({...updatedRegistration, sex: e.target.value})}>
+                            <option value="" disabled hidden>Selecciona una Opción</option>
+                            <option value='Masculino'>Masculino</option>
+                            <option value='Femenino'>Femenino</option>
+                        </Select>
+                        <Input name="address" placeholder="Domicilio"
+                        value={updatedRegistration.address || ""}
+                        onChange={(e) => setUpdatedRegistration({ ...updatedRegistration, address: e.target.value })}
+                        />
+                        <NumberInput w={'full'}
+                        value={updatedRegistration.phone || ""}
+                        onChange={(value) => setUpdatedRegistration({ ...updatedRegistration, phone: Number(value) })} >
+                            <NumberInputField placeholder="1123456789" name="phone"/>
+                        </NumberInput>
+                        <Input placeholder="Fecha de Nacimiento" name="age" type="date"
+                        value={updatedRegistration.age ? formatDate(updatedRegistration.age) : ""}
+                        onChange={(e) => setUpdatedRegistration({ ...updatedRegistration, age: e.target.value })}
+                        />
+                        <Select value={updatedRegistration.church || ""} 
+                        onChange={(e) => setUpdatedRegistration({...updatedRegistration, church: e.target.value})}>
+                            <option value="" disabled hidden>Selecciona una Opción</option>
+                            <option value='Se congrega'>Si</option>
+                            <option value='No se congrega'>No</option>
+                        </Select>
+                    </VStack>
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button colorScheme='blue' mr={3} 
+                    onClick={() => {handleUpdateRegistration(updatedRegistration._id, updatedRegistration)}}
+                    >                        
+                    Update
+                    </Button>
+                    <Button variant='ghost' onClick={onClose}>Cancel</Button>
+                </ModalFooter>
+                </ModalContent>
+        </Modal>
           </Container>
     );
 };
