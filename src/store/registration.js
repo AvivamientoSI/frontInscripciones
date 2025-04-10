@@ -12,7 +12,7 @@ export const useRegistrationStore = create((set) => ({
             return { success: false, message: "Complete todos los campos" };
         }
         try {
-            const res = await fetch("https://inscripciones-i4tm.onrender.com/registration/registration", {
+            const res = await fetch("https://inscripciones-i4tm.onrender.com/registration", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newRegistration),
@@ -47,7 +47,7 @@ export const useRegistrationStore = create((set) => ({
     },
 
     fetchRegistrations: async () => {
-        const response = await fetch('https://inscripciones-i4tm.onrender.com/registration/registration');
+        const response = await fetch('https://inscripciones-i4tm.onrender.com/registration');
         const data = await response.json();
         
         set({registrations: data.data});
@@ -60,7 +60,7 @@ export const useRegistrationStore = create((set) => ({
             return { success: false, message: "ID no proporcionado" };
           }
         
-        const response = await fetch(`https://inscripciones-i4tm.onrender.com/registration/registration/${id}`, {
+        const response = await fetch(`https://inscripciones-i4tm.onrender.com/registration/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -76,7 +76,7 @@ export const useRegistrationStore = create((set) => ({
     },
 
     deleteRegistration: async (id) => {
-        const response = await fetch(`https://inscripciones-i4tm.onrender.com/registration/registration/${id}`, {
+        const response = await fetch(`https://inscripciones-i4tm.onrender.com/registration/${id}`, {
             method: 'DELETE',
         });
         const data = await response.json();
