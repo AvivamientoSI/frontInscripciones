@@ -8,6 +8,7 @@ import Discipulado from "./pages/Discipulado.jsx"
 import Footer from "./components/Footer.jsx"
 import Tables, { EsTable } from "./pages/Tables.jsx"
 import { AbcTable, DisTable } from "./pages/Tables.jsx"
+import Registration from "./pages/Registrations.jsx"
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/table/abc" element={<AbcTable/>}/>
           <Route path="/table/dis" element={<DisTable/>}/>
           <Route path="/table/es" element={<EsTable/>}/>
+          <Route path="/registration" element={<Registration/>}/>
 
 
         </Routes>

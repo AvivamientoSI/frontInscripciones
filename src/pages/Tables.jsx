@@ -64,7 +64,7 @@ export const AbcTable = () => {
                         <Th>#</Th>
                         <Th>Nombre</Th>
                         <Th>Apellido</Th>
-                        {/* <Th isNumeric>Celular</Th> */}
+                        <Th isNumeric>Celular</Th>
                         <Th>Asistencia</Th>
                         
 
