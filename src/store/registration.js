@@ -38,8 +38,10 @@ export const useRegistrationStore = create((set) => ({
             
             if (data.data.sex === "Masculino")
                 return {success: true, message: `Hermano registrado con éxito` };
-            else (data.data.sex === "Femenino")
+            else if (data.data.sex === "Femenino")
                 return {success: true, message: `Hermana registrada con éxito` };
+            else 
+                return {success: true, message: `Registro creado con éxito` };
             
         } catch (error) {
             return { success: false, message: "Error Supremo en el registro", error };
