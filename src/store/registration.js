@@ -12,7 +12,7 @@ export const useRegistrationStore = create((set) => ({
             return { success: false, message: "Complete todos los campos" };
         }
         try {
-            const res = await fetch("http://localhost:8080/registration", {
+            const res = await fetch("https://inscripciones-i4tm.onrender.com/registration", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newRegistration),
@@ -34,7 +34,7 @@ export const useRegistrationStore = create((set) => ({
     },
 
     fetchRegistrations: async () => {
-        const response = await fetch('http://localhost:8080/registration');
+        const response = await fetch('https://inscripciones-i4tm.onrender.com/registration');
         const data = await response.json();
         console.log(data);
         
@@ -43,7 +43,7 @@ export const useRegistrationStore = create((set) => ({
     },
 
     updateRegistration: async (id, updatedRegistration) => {
-        const response = await fetch(`http://localhost:8080/registration/${id}`, {
+        const response = await fetch(`https://inscripciones-i4tm.onrender.com/registration/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
