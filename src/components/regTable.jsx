@@ -33,8 +33,8 @@ export const RegTable = ({registrations, index, onEdit}) => {
     return (
             <Tr>
                 <Td>{index}</Td>
-                <Td>{registrations.name}</Td>
-                <Td textAlign={"center"}>{registrations.lastname}</Td>
+                <Td>{registrations.name.toUpperCase()}</Td>
+                <Td textAlign={"center"}>{registrations.lastname.toUpperCase()}</Td>
                 <Td isNumeric>{registrations.phone}</Td>
                 <Td>
                     <HStack alignItems={"center"} justifyContent={"center"} spacing={4}>
